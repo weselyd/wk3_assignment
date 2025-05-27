@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  async function movieSearch() {
+  async function movieSearch() {  // Function to search for movies using the OMDB API - nonblocking
     const query = encodeURIComponent(searchInput.value.trim());
     if (!query) return;
 
-    // Get selected search type (title or imdbID)
+    // Get selected search type (title or IMDB ID)
     const searchType = document.querySelector('input[name="searchType"]:checked').value;
 
     const apiKey = 'fd800a8f';
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       url = `http://www.omdbapi.com/?i=${query}&apikey=${apiKey}`;
     }
 
-    // Show loading spinner
+    // Display loading spinner for slow network loading
     resultsContainer.innerHTML = `<div style="text-align:center;"><span class="spinner" style="display:inline-block;width:32px;height:32px;border:4px solid #FFD700;border-top:4px solid #001f3f;border-radius:50%;animation:spin 1s linear infinite;"></span></div>
     <style>
       @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch(url);
       const data = await response.json();
 
-      // Clear spinner
+      // Clear spinner for slow network loading
       resultsContainer.innerHTML = '';
 
       if (data.Response === "False") {
@@ -76,8 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (Object.hasOwnProperty.call(data, key)) {
           if (key === "Response" || key === "Poster") continue; // Hide the "Response" and "Poster" rows
           let value = data[key];
-          // If value is an array (like Ratings), format it
-          if (Array.isArray(value)) {
+          if (Array.isArray(value)) {  // If value is an array, format it
             value = value.map(r => `${r.Source}: ${r.Value}`).join('<br>');
           }
           table += `<tr>
