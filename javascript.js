@@ -1,14 +1,8 @@
-// Search functionality with input field and results display (10 pts)
-// Detailed view showing movie information (10 pts)
-// Error handling for API failures and invalid searches (5 pts)
-// Loading states while fetching data (5 pts)
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.querySelector('button');
   const searchInput = document.querySelector('input[type="text"]');
 
-  // Create or select a container for results
+  // If resultsContainer doesn't exist, create it
   let resultsContainer = document.getElementById('results');
   if (!resultsContainer) {
     resultsContainer = document.createElement('div');
@@ -27,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // movieSearch fucntionality to search OMDB API using title or IMDb ID
+  // Displays spinner while loading data then builds table of all data returned from the API
   async function movieSearch() {  // Function to search for movies using the OMDB API - nonblocking
     const query = encodeURIComponent(searchInput.value.trim());
     if (!query) return;
@@ -34,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get selected search type (title or IMDB ID)
     const searchType = document.querySelector('input[name="searchType"]:checked').value;
 
-    const apiKey = 'fd800a8f';
+    const apiKey = 'fd800a8f';  // OMDB API key
     let url = '';
 
     if (searchType === 'title') {
@@ -88,8 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
       table += `</tbody></table>`;
       resultsContainer.innerHTML = posterHtml + table;
     } catch (error) {
-      resultsContainer.innerHTML = `<div style="color:#FFD700;text-align:center;font-weight:bold;">Error fetching data.</div>`;
-      console.error('Error fetching data:', error);
+      resultsContainer.innerHTML = `<div style="color:#FFD700;text-align:center;font-weight:bold;">IMDb ID not found!</div>`;
+      console.error('Error fetching data: IMDb ID does not exist', error);
     }
   }
 });
