@@ -12,3 +12,5 @@ Limitations / future improvements
 While this app does what it sets out to do there are some limitations and improvements that could be implemented:
 1. There is a limit to a single movie that appears as a search result even if two have very similar names (A Minecraft Movie & The Minecraft Movie).  It would be great if both could appear - this is a limit of the API mainly but the application could possible account for this. 
 2. Auto-complete for movie titles when typing in text box.  This doesn't have the modern experience of something like IMDB.com that tries to guess what you're going to type based on popularity and partial string.
+
+Video Walkthrough link: https://youtu.be/SLmb1aE5iKk
